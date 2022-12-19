@@ -2,21 +2,73 @@ body{
     margin:0;
     min-height:100vh;
     width:100%;
+    display:flex;
+    justify-content: center;
+    background-color: rgb(58, 213, 58);
+    position: relative;
+   
+    
+}
+
+button{
+    background-color:green;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#all-pokemons{
+    background-color: rgb(58, 213, 58);
+    text-align: center;
+    
+    
+
+}
+
+#hole-pokemon-container{
+    background-color: rgb(58, 213, 58);
+    flex-wrap: wrap ;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+
+}
+
+.poke-img{
+    height:80px;
+    width:80px;
+    object-fit: contain;
+}
+
+.poke-name{
+    font-size:20px;
+}
+
+.profil-card{
+    width:250px;
+    height:200px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px 1px black;
+    margin:10px;
+    background-color:white ;
 }
 
 #head-container{
     display:flex;
     justify-content: space-between;
-    background-color: rgb(243, 71, 71);
+   
     padding:20px;
-    padding-left: 30px;
-    padding-top:30px;
+    
     border-radius:10px;
     border-top-right-radius:10px;
-    height:50%;
-    position:absolute;
-    top:0;
-    z-index:5;
+    height:400px;
+   
+   
+    
     width:100%;
     
     
@@ -56,10 +108,17 @@ body{
 }
 
 #content-container{
-    min-height:100vh;
-    position: relative;
-    width:100%;
    
+    position: absolute;
+    width:600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index:15;
+    box-shadow: 2px 2px 2px 2px gray;
+    border-radius: 10px;
+    margin-top:20px;
 }
 
 #main-content{
@@ -79,10 +138,14 @@ body{
     display: flex;
     justify-content: flex-start;
     width:100%;
-    padding:30px;
-    position:absolute;
-    top: 50%;
-    z-index: 3;
+    padding-top:90px;
+    padding-left:30px;
+    background-color: gray;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    margin-top: -15px;
+   
+    
 }
 
 #head-info p{
@@ -90,10 +153,10 @@ body{
     font-size: 25px;
     font-weight: bold;
     transition: all 250ms ease-in-out;
-    
+    z-index: 20;
 }
 
-#head-info p:hover{
+.hover:hover{
     color:rgb(255, 66, 66);
     transform: scale(1.1);
     cursor:pointer;
@@ -104,11 +167,12 @@ body{
 }
 
 #common-info-container{
-    padding-top: 150px;
+    padding-top: 50px;
     padding-left:30px;
     background-color: gray;
-     position:absolute;
-    top:45%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+   
     width:100%;
     padding-bottom: 20px;
 }
@@ -119,14 +183,17 @@ body{
     display:flex;
     justify-content: center;
     flex-direction: column;
+    
 
 
 }
 
 #poke-pic{
-    width:400px;
-    height:300px;
+    width: 400px;
+    height: 300px;
     object-fit: contain;
+    margin-bottom: -40px;
+    z-index: 5;
 }
 
 .poke-class{
@@ -146,13 +213,13 @@ body{
     flex-direction: column;
     justify-content: center;
     width:100%;
-    padding-top: 150px;
+    padding-top: 50px;
     padding-left:30px;
     padding-right: 30px;
     background-color: gray;
-     position:absolute;
-    top:45%;
     padding-bottom: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   
     
 }
@@ -176,6 +243,45 @@ body{
     display:none;
 }
 
+#overlay{
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.185);
+}
 
+.bg-orange{
+    background-color: orange;
+}
+
+.bg-blue{
+    background-color: rgb(157, 157, 255);
+}
+
+.bg-green{
+    background-color: rgb(155, 250, 161);
+}
+.bg-red{
+    background-color: rgb(255, 146, 146);
+}
+.bg-brown{
+    background-color: rgb(213, 183, 108);
+}
+.bg-bluely{
+    background-color: rgb(0, 242, 255);
+}
+
+.bg-normal{
+    background-color: antiquewhite;
+}
+
+.bg-electric{
+    background-color: rgb(254, 254, 113);
+}
+
+.bg-
 
 

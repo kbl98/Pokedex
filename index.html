@@ -14,21 +14,33 @@
 
  
 
-    <body onload="getPokemon()">
-    <div id="content-container">
-        <div id="head-container">
-            <div id="back" onclick="back()"><</div>
-            <div id="main-content">
+    <body onload="getAllPokemon()">
+        <div id="overlay" class="d-none" onclick="closeCard()"></div>
+        <div id="all-pokemons">
+    <div id="hole-pokemon-container">
+
+
+    </div>
+    <button onclick="loadMore()">MEHR LADEN</button>
+</div>
+    <div id="content-container" class="d-none">
+       
+            <div id="head-container">
+                <div id="back" onclick="back()"><</div>
+                <div id="main-content"> 
+                    
                 <h1 id="name"></h1>
-                <div id="pic-container">
-                </div>
+                <div id="pic-container"></div> 
+                <img id="poke-pic" src="">
+                 
             </div>
-            <img id="poke-pic" src="">
+           
             <div id="forward" onclick="next()">></div>
-        </div>  
+        </div>
+           
         <div id="head-info">
-            <p id="common-p" class="color-red" onclick="removeHide('common-info-container','info-container-strongness','common-p','strong-p')"> Allgemeines </p>
-            <p id="strong-p" class="" onclick="removeHide('info-container-strongness','common-info-container','strong-p','common-p')" >Stärken</p>
+            <p id="common-p" class="hover color-red" onclick="removeHide('common-info-container','info-container-strongness','common-p','strong-p')"> Allgemeines </p>
+            <p id="strong-p" class="hover" onclick="removeHide('info-container-strongness','common-info-container','strong-p','common-p')" >Stärken</p>
 
         </div>
         <div id="common-info-container" class="">

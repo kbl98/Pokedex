@@ -4,20 +4,49 @@ body{
     width:100%;
     display:flex;
     justify-content: center;
-    background-color: rgb(58, 213, 58);
+    background-image: url("img/bg.jpg");
     position: relative;
+    font-family: 'Comic Neue';
    
     
 }
 
+#header-all{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+
+#titel{
+    color:silver !important
+}
+
+#search{
+    display:flex;
+}
+
+#search-img{
+    width:30px;
+    height:40px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+h1{
+    color:black;
+    margin-top:20px;
+}
 button{
     background-color:green;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 10px !important;
 }
 
 #all-pokemons{
-    background-color: rgb(58, 213, 58);
+   background-image: url("img/bg.jpg"); ;
     text-align: center;
     
     
@@ -25,7 +54,7 @@ button{
 }
 
 #hole-pokemon-container{
-    background-color: rgb(58, 213, 58);
+    background-image: url("img/bg.jpg");
     flex-wrap: wrap ;
     display:flex;
     justify-content: center;
@@ -35,26 +64,36 @@ button{
 }
 
 .poke-img{
-    height:80px;
-    width:80px;
+    height:120px;
+    width:100px;
     object-fit: contain;
 }
 
 .poke-name{
     font-size:20px;
+    margin-bottom:20px;
+    margin-top:20px;
 }
 
 .profil-card{
-    width:250px;
-    height:200px;
-    display:flex;
-    align-items: center;
+    width: 250px;
+    height: 200px;
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
-    padding:10px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 2px 2px 1px 1px black;
-    margin:10px;
-    background-color:white ;
+    margin: 10px;
+    padding-top: 20px;
+}
+.profil-text{
+    display: flex;
+    padding-top: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
 }
 
 #head-container{
@@ -116,7 +155,7 @@ button{
     justify-content: center;
     align-items: center;
     z-index:15;
-    box-shadow: 2px 2px 2px 2px gray;
+    box-shadow: 2px 2px 2px 2px black;
     border-radius: 10px;
     margin-top:20px;
 }
@@ -136,14 +175,16 @@ button{
 
 #head-info{
     display: flex;
-    justify-content: flex-start;
-    width:100%;
-    padding-top:90px;
-    padding-left:30px;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 90px;
+    padding-left: 150px;
+    padding-right: 150px;
     background-color: gray;
-    border-top-left-radius:10px;
-    border-top-right-radius:10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     margin-top: -15px;
+    border-bottom: 1px solid;
    
     
 }
@@ -257,31 +298,63 @@ button{
     background-color: orange;
 }
 
-.bg-blue{
-    background-color: rgb(157, 157, 255);
+.bg-bug{
+    background-color:#94BC4A
 }
 
-.bg-green{
-    background-color: rgb(155, 250, 161);
+.bg-dark{
+    background-color: #736C75;
 }
-.bg-red{
-    background-color: rgb(255, 146, 146);
+.bg-dragon{
+    background-color: #6A7BAF;
 }
-.bg-brown{
-    background-color: rgb(213, 183, 108);
-}
-.bg-bluely{
-    background-color: rgb(0, 242, 255);
-}
-
-.bg-normal{
-    background-color: antiquewhite;
-}
-
 .bg-electric{
-    background-color: rgb(254, 254, 113);
+    background-color: #E5C531;
+}
+.bg-fairy{
+    background-color: #E397D1;
 }
 
-.bg-
+.bg-fighting{
+    background-color: #CB5F48;
+}
+
+.bg-fire{
+    background-color: #EA7A3C;
+}
+
+.bg-flying{
+    background-color: #7DA6DE;
+}
+.bg-ghost{
+    background-color: #846AB6;
+}
+.bg-grass{
+    background-color: #71C558;
+}
+.bg-ground{
+    background-color: #CC9F4F;
+}
+.bg-ice{
+    background-color: #70CBD4;
+}
+.bg-normal{
+    background-color: #AAB09F;
+}
+.bg-poison{
+    background-color: #B468B7;
+}
+.bg-psychic{
+    background-color: #E5709B;
+}
+.bg-rock{
+    background-color: #B2A061;
+}
+.bg-steel{
+    background-color: #89A1B0;
+}
+.bg-water{
+    background-color: #539AE2;
+}
 
 

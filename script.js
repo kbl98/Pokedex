@@ -2,9 +2,10 @@ let past_types = [];
 let array_moves = [];
 let counterPokemon = 20;
 let names = [];
-
+let pokemonJson;
 let current_bg;
 let currentPokemon;
+let pokemon_name;
 
 function array_pasttype() {
   past_types = [];
@@ -24,19 +25,28 @@ function push_array_moves() {
 }
 
 async function getAllPokemon() {
-    names=[];
+  names = [];
   let n = 0;
   let all_pokes = document.getElementById("hole-pokemon-container");
   all_pokes.innerHTML = "";
   for (let i = 1; i <= counterPokemon; i++) {
     let url_all_pokes = await fetch("https://pokeapi.co/api/v2/pokemon/" + i);
-
     pokemon_name = await url_all_pokes.json();
+    await allPokesHTML(all_pokes, pokemon_name, n, i);
+    await setMainTypesHtml(i, pokemon_name);
+    let id = pokemon_name["name"];
+    setBackground(id, pokemon_name);
+    n++;
+    names.push(pokemon_name["name"]);
+  }
+}
 
-    all_pokes.innerHTML += `
+async function allPokesHTML(all_pokes, pokemon_name, n, i) {
+  all_pokes.innerHTML += `
     <div id="${
       pokemon_name["name"]
-    }" class="profil-card" onclick="getPokemon(${n})">
+    }" class="profil-card" title="${
+        pokemon_name["name"]}" onclick="getPokemon(${n})">
         <div id="info-poke${i}" class="profil-text">
             <h3 class="poke-name">${pokemon_name["name"].toUpperCase()}</h3>
             <div id="main-types${i}"></div>
@@ -44,111 +54,44 @@ async function getAllPokemon() {
         <img class="poke-img" src="${
           pokemon_name["sprites"]["other"]["official-artwork"]["front_default"]
         }"
-    
     </div>`;
-    let main_types = document.getElementById("main-types" + i);
-    for (let j = 0; j < pokemon_name["types"].length; j++) {
-      main_types.innerHTML += `<div class="poke-class" >${pokemon_name["types"][j]["type"]["name"]}</div>`;
-    }
+}
 
-    let id = pokemon_name["name"];
-    setBackground(id, pokemon_name);
-
-    n++;
-    names.push(pokemon_name["name"]);
+async function setMainTypesHtml(i, pokemon_name) {
+  let main_types = document.getElementById("main-types" + i);
+  for (let j = 0; j < pokemon_name["types"].length; j++) {
+    main_types.innerHTML += `<div class="poke-class" >${pokemon_name["types"][j]["type"]["name"]}</div>`;
   }
 }
-function setBackground(id, pokemon) {
-  let type = pokemon["types"][0]["type"]["name"];
 
+async function setBackground(id, pokemon) {
+  let type = pokemon["types"][0]["type"]["name"];
   document.getElementById(id).classList.remove(current_bg);
-  if (type == "fire") {
-    document.getElementById(id).classList.add("bg-fire");
-    current_bg = "bg-fire";
-  }
-  if (type == "water") {
-    document.getElementById(id).classList.add("bg-water");
-    current_bg = "bg-water";
-  }
-  if (type == "grass") {
-    document.getElementById(id).classList.add("bg-grass");
-    current_bg = "bg-grass";
-  }
-  if (type == "poison") {
-    document.getElementById(id).classList.add("bg-poison");
-    current_bg = "bg-poison";
-  }
-  if (type == "bug") {
-    document.getElementById(id).classList.add("bg-bug");
-    current_bg = "bg-bug";
-  }
-  if (type == "flying") {
-    document.getElementById(id).classList.add("bg-flying");
-    current_bg = "bg-flying";
-  }
-  if (type == "normal") {
-    document.getElementById(id).classList.add("bg-normal");
-    current_bg = "bg-normal";
-  }
-  if (type == "dark") {
-    document.getElementById(id).classList.add("bg-dark");
-    current_bg = "bg-dark";
-  }
-  if (type == "dragon") {
-    document.getElementById(id).classList.add("bg-dragon");
-    current_bg = "bg-dragon";
-  }
-  if (type == "electric") {
-    document.getElementById(id).classList.add("bg-electric");
-    current_bg = "bg-electric";
-  }
-  if (type == "fairy") {
-    document.getElementById(id).classList.add("bg-fairy");
-    current_bg = "bg-fairy";
-  }
-  if (type == "fighting") {
-    document.getElementById(id).classList.add("bg-fighting");
-    current_bg = "bg-fighting";
-  }
-  if (type == "ghost") {
-    document.getElementById(id).classList.add("bg-ghost");
-    current_bg = "bg-ghost";
-  }
-  if (type == "ground") {
-    document.getElementById(id).classList.add("bg-ground");
-    current_bg = "bg-ground";
-  }
-  if (type == "psychic") {
-    document.getElementById(id).classList.add("bg-psychic");
-    current_bg = "bg-psychic";
-  }
-  if (type == "rock") {
-    document.getElementById(id).classList.add("bg-rock");
-    current_bg = "bg-rock";
-  }
-  if (type == "steel") {
-    document.getElementById(id).classList.add("bg-steel");
-    current_bg = "bg-steel";
-  }
-  if (type == "ice") {
-    document.getElementById(id).classList.add("bg-ice");
-    current_bg = "bg-ice";
-  }
+  await getBackround(type, id);
+}
+
+async function getBackround(type, id) {
+  let bg = "bg-" + type;
+  document.getElementById(id).classList.add(bg);
+  current_bg = bg;
 }
 
 async function getPokemon(n) {
-  window.scrollTo(0, 0);
   currentPokemon = n;
   let name = names[n];
- 
   document.getElementById("overlay").classList.remove("d-none");
   document.getElementById("content-container").classList.remove("d-none");
   let pokeURL = await fetch("https://pokeapi.co/api/v2/pokemon/" + name);
   pokemonJson = await pokeURL.json();
- 
   push_array_moves();
   array_pasttype();
+  await cardHeadHtml(name);
+  await setBackground("head-container", pokemonJson);
+  htmlContainerStrongness();
+  htmlCommmonContainer();
+}
 
+async function cardHeadHtml(name) {
   let pic_content = document.getElementById("pic-container");
   pic_content.innerHTML = "";
   let main_pic =
@@ -156,15 +99,11 @@ async function getPokemon(n) {
   for (let i = 0; i < pokemonJson["types"].length; i++) {
     pic_content.innerHTML += `<div class="poke-class" id="poke-class${i}">${pokemonJson["types"][i]["type"]["name"]}</div>`;
   }
-  setBackground("head-container", pokemonJson);
-
   document.getElementById("name").innerHTML = `${name.toUpperCase()}`;
   document.getElementById("poke-pic").setAttribute("src", main_pic);
-  htmlContainerStrongness();
-  htmlCommmonContainer();
 }
 
-function htmlContainerStrongness() {
+async function htmlContainerStrongness() {
   document.getElementById("info-container-strongness").innerHTML = "";
   for (let i = 0; i < 6; i++) {
     document.getElementById("info-container-strongness").innerHTML += `
@@ -177,7 +116,7 @@ function htmlContainerStrongness() {
   }
 }
 
-function htmlCommmonContainer() {
+async function htmlCommmonContainer() {
   document.getElementById("common-info-container").innerHTML = "";
   document.getElementById("common-info-container").innerHTML = `
         <p><b>Gewicht: ${pokemonJson["weight"]} kg</b></p>
@@ -222,35 +161,43 @@ function back() {
   getPokemon(last_poke);
 }
 
-function loadMore() {
+async function loadMore() {
   counterPokemon += 20;
   if (counterPokemon > 1154) {
     counterPokemon = 1154;
   }
-  getAllPokemon();
+  await getAllPokemon();
+  document.getElementById("button").scrollIntoView();
 }
 
-function search(){
-    let input=document.getElementById("input").value;
-   
-    input=input.toLowerCase();
-    let results;
-    for(let i=0;i<names.length;i++){
-        if (names[i].includes(input)){
-            results=(i+1);
-            document.getElementById("info-poke"+results).scrollIntoView();
-            break;
-        }
+async function loadAll() {
+  counterPokemon = 1154;
 
-      }
-      
+  getAllPokemon();
+
+  document.getElementById("button").classList.add("d-none");
+  document.getElementById("button-2").classList.add("d-none");
+}
+
+function search() {
+  let input = document.getElementById("input").value;
+
+  input = input.toLowerCase();
+  let results;
+  for (let i = 0; i < names.length; i++) {
+    if (names[i].includes(input)) {
+      results = i + 1;
+      document.getElementById("info-poke" + results).scrollIntoView();
+      getPokemon(i);
+
+      break;
     }
-    
-    
-    
-    
-    
+  }
+  document.getElementById("input").value = "";
+}
 
-    
+function scrollBottom() {
+  let elheight = document.getElementById("all-pokemons").offsetHeight;
 
-
+  window.scrollTo(0, elheight);
+}

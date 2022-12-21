@@ -6,8 +6,9 @@ let pokemonJson;
 let current_bg;
 let currentPokemon;
 let pokemon_name;
+let allPokemonJson = [];
 
-function array_pasttype() {
+/*function array_pasttype() {
   past_types = [];
   for (let i = 0; i < pokemonJson["past_types"].length; i++) {
     past_types.push(pokemonJson["past_types"][i]);
@@ -15,7 +16,7 @@ function array_pasttype() {
   if (past_types == "") {
     past_types.push("Keine");
   }
-}
+}*/
 
 function push_array_moves() {
   array_moves = [];
@@ -25,6 +26,7 @@ function push_array_moves() {
 }
 
 async function getAllPokemon() {
+  allPokemonJson = [];
   names = [];
   let n = 0;
   let all_pokes = document.getElementById("hole-pokemon-container");
@@ -38,15 +40,17 @@ async function getAllPokemon() {
     setBackground(id, pokemon_name);
     n++;
     names.push(pokemon_name["name"]);
+
+    allPokemonJson.push(pokemon_name);
   }
+  console.log(allPokemonJson);
 }
 
 async function allPokesHTML(all_pokes, pokemon_name, n, i) {
   all_pokes.innerHTML += `
-    <div id="${
-      pokemon_name["name"]
-    }" class="profil-card" title="${
-        pokemon_name["name"]}" onclick="getPokemon(${n})">
+    <div id="${pokemon_name["name"]}" class="profil-card" title="${
+    pokemon_name["name"]
+  }" onclick="getPokemon(${n})">
         <div id="info-poke${i}" class="profil-text">
             <h3 class="poke-name">${pokemon_name["name"].toUpperCase()}</h3>
             <div id="main-types${i}"></div>
@@ -81,10 +85,11 @@ async function getPokemon(n) {
   let name = names[n];
   document.getElementById("overlay").classList.remove("d-none");
   document.getElementById("content-container").classList.remove("d-none");
-  let pokeURL = await fetch("https://pokeapi.co/api/v2/pokemon/" + name);
-  pokemonJson = await pokeURL.json();
+  /*let pokeURL = await fetch("https://pokeapi.co/api/v2/pokemon/" + name);
+  pokemonJson = await pokeURL.json();*/
+  pokemonJson = allPokemonJson[n];
   push_array_moves();
-  array_pasttype();
+  /*array_pasttype();*/
   await cardHeadHtml(name);
   await setBackground("head-container", pokemonJson);
   htmlContainerStrongness();
@@ -110,7 +115,7 @@ async function htmlContainerStrongness() {
         <div class="strongness">
         <p>${pokemonJson["stats"][i]["stat"]["name"]}</p>
         <div class="progress">
-        <div class="progress-bar bg-success" id="process${i}" role="progressbar" style="width: ${pokemonJson["stats"][i]["base_stat"]}%" aria-valuenow="${pokemonJson["stats"][i]["base_stat"]}" aria-valuemin="0" aria-valuemax="100">${pokemonJson["stats"][i]["base_stat"]}</div>
+        <div class="progress-bar ${current_bg}" id="process${i}" role="progressbar" style="width: ${pokemonJson["stats"][i]["base_stat"]}%" aria-valuenow="${pokemonJson["stats"][i]["base_stat"]}" aria-valuemin="0" aria-valuemax="100">${pokemonJson["stats"][i]["base_stat"]}</div>
         </div>
         </div>`;
   }
@@ -119,10 +124,10 @@ async function htmlContainerStrongness() {
 async function htmlCommmonContainer() {
   document.getElementById("common-info-container").innerHTML = "";
   document.getElementById("common-info-container").innerHTML = `
-        <p><b>Gewicht: ${pokemonJson["weight"]} kg</b></p>
+        <p><b>Gewicht: ${pokemonJson["weight"] / 10} kg</b></p>
         <p><b>Grösse: ${pokemonJson["height"]} dm</b></p>
-        <p><b>Vorentwicklungen:</b> ${past_types}</p>
-        <p><b>Moves:</b><br> ${array_moves}</p>`;
+       <!-- <p><b>Vorentwicklungen:</b> ${past_types}</p>-->
+        <p id="all-moves"><b>Moves:</b><br> ${array_moves}</p>`;
 }
 
 function removeHide(id, id2, p1, p2) {
@@ -191,5 +196,3 @@ function search() {
   }
   document.getElementById("input").value = "";
 }
-
-

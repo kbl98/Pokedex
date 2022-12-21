@@ -154,8 +154,8 @@ button {
 }
 
 #content-container {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  top: 15px;
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -298,7 +298,7 @@ button {
 }
 
 .bg-dark {
-  background-color: #736c75;
+  background-color: #757376;
 }
 .bg-dragon {
   background-color: #6a7baf;

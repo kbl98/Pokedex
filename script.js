@@ -154,7 +154,6 @@ function next() {
 
 function back() {
   let last_poke = currentPokemon - 1;
-
   if (last_poke < 0) {
     last_poke = currentPokemon;
   }
@@ -172,16 +171,13 @@ async function loadMore() {
 
 async function loadAll() {
   counterPokemon = 1154;
-
   getAllPokemon();
-
   document.getElementById("button").classList.add("d-none");
   document.getElementById("button-2").classList.add("d-none");
 }
 
 function search() {
   let input = document.getElementById("input").value;
-
   input = input.toLowerCase();
   let results;
   for (let i = 0; i < names.length; i++) {
@@ -196,8 +192,4 @@ function search() {
   document.getElementById("input").value = "";
 }
 
-function scrollBottom() {
-  let elheight = document.getElementById("all-pokemons").offsetHeight;
 
-  window.scrollTo(0, elheight);
-}
